@@ -19,8 +19,8 @@ Add the dependency
 `implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.3'`
 
 ### Usage
-- Just add in your code, set visibility to hide and show the Customloadingbar
-```new Async() {
+```
+new Async() {
                @Override
                protected String doBackground() {
                    //do your job in background
