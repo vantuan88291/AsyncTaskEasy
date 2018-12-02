@@ -16,23 +16,37 @@ allprojects {
 
 Add the dependency
 
-`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.3'`
+`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.4'`
 
 ### Usage
 ```
-new Async() {
-               @Override
-               protected String doBackground() {
-                   //do your job in background
-                   return null;
-               }
+Async job = new Async() {
+            @Override
+            protected Object doBackground() {
+                //do your job
+                return null;
+            }
 
-               @Override
-               protected void onSuccess(String s) {
-                   super.onSuccess(s);
-                   //do your result
-               }
-           };
+            @Override
+            protected void onSuccess(Object s) {
+                super.onSuccess(s);
+                //do your result
+
+            }
+
+            @Override
+            protected void onFail(String err) {
+                super.onFail(err);
+                ///do when have some fails
+
+            }
+
+            @Override
+            protected void onLoading() {
+                super.onLoading();
+                //show loading
+            }
+        };
 ```
 
 
@@ -43,3 +57,4 @@ new Async() {
 | onLoading()      | show loading progress |
 | onSuccess     | show your result |
 | doBackground | run in background |
+| onFail | When have a exeption |
