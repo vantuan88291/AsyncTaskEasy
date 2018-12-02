@@ -5,17 +5,20 @@ import android.os.AsyncTask;
 
 @SuppressLint("StaticFieldLeak")
 public abstract class Async {
-    public Async() {
+    private Asyn sync;
 
-        Asyn sync = new Asyn() {
+    public Async() {
+        sync = new Asyn() {
             @Override
             protected void onLoading() {
                 Async.this.onLoading();
             }
+
             @Override
-            protected String doInBackGround() throws Exception{
+            protected String doInBackGround() throws Exception {
                 return Async.this.doBackground();
             }
+
             @Override
             protected void onSuccess(String s) {
                 Async.this.onSuccess(s);
@@ -24,6 +27,12 @@ public abstract class Async {
         sync.execute();
     }
 
+    public Async stop() {
+        if (sync != null) {
+            sync.cancel(true);
+        }
+        return this;
+    }
 
     private abstract class Asyn extends AsyncTask<String, Integer, String> {
         @Override
@@ -35,6 +44,7 @@ public abstract class Async {
                 return e.getLocalizedMessage();
             }
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -46,17 +56,19 @@ public abstract class Async {
             super.onPostExecute(s);
             onSuccess(s);
         }
-        protected abstract void onLoading();
 
+        protected abstract void onLoading();
         protected abstract String doInBackGround() throws Exception;
 
         protected abstract void onSuccess(String s);
     }
 
     protected abstract String doBackground() throws Exception;
+
     protected void onSuccess(String s) {
 
     }
+
     protected void onLoading() {
 
     }
