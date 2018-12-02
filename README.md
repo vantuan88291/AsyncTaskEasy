@@ -54,7 +54,7 @@ Async job = new Async() {
 ####  Supported Attributes
  function            | Description  |
 | ------------- | -----:|
-| onLoading()      | show loading progress |
+| onLoading      | show loading progress |
 | onSuccess     | show your result |
 | doBackground | run in background |
 | onFail | When have a exeption |
