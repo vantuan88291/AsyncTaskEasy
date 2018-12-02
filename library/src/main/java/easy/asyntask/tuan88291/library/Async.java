@@ -7,7 +7,7 @@ import android.os.AsyncTask;
 public abstract class Async {
     private Asyn sync;
 
-    public Async() {
+    protected Async() {
         sync = new Asyn() {
             @Override
             protected void onLoading() {
@@ -15,13 +15,18 @@ public abstract class Async {
             }
 
             @Override
-            protected String doInBackGround() throws Exception {
+            protected Object doInBackGround() throws Exception {
                 return Async.this.doBackground();
             }
 
             @Override
-            protected void onSuccess(String s) {
+            protected void onSuccess(Object s) {
                 Async.this.onSuccess(s);
+            }
+
+            @Override
+            protected void onFail(String err) {
+                Async.this.onFail(err);
             }
         };
         sync.execute();
@@ -34,14 +39,14 @@ public abstract class Async {
         return this;
     }
 
-    private abstract class Asyn extends AsyncTask<String, Integer, String> {
+    private abstract class Asyn extends AsyncTask<Object, Integer, Object> {
         @Override
-        protected String doInBackground(String... strings) {
+        protected Object doInBackground(Object... strings) {
 
             try {
                 return doInBackGround();
             } catch (Exception e) {
-                return e.getLocalizedMessage();
+                return null;
             }
         }
 
@@ -52,24 +57,38 @@ public abstract class Async {
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(Object s) {
             super.onPostExecute(s);
-            onSuccess(s);
+            if (s == null){
+                onFail("Null value");
+                return;
+            }
+            try {
+                onSuccess(s);
+            } catch (Exception e) {
+                onFail(e.toString());
+            }
         }
 
         protected abstract void onLoading();
-        protected abstract String doInBackGround() throws Exception;
+        protected abstract Object doInBackGround() throws Exception;
 
-        protected abstract void onSuccess(String s);
+        protected abstract void onSuccess(Object s);
+        protected abstract void onFail(String err);
     }
 
-    protected abstract String doBackground() throws Exception;
+    protected abstract Object doBackground() throws Exception;
 
-    protected void onSuccess(String s) {
+    protected void onSuccess(Object s) {
 
     }
 
     protected void onLoading() {
 
     }
+
+    protected void onFail(String err) {
+
+    }
+
 }
