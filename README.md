@@ -16,7 +16,7 @@ allprojects {
 
 Add the dependency
 
-`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.4'`
+`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.5'`
 
 ### Usage
 ```
