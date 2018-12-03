@@ -8,7 +8,7 @@ import java.util.List;
 
 import easy.asyntask.tuan88291.asynctaskeasy.Room.AppDatabase;
 import easy.asyntask.tuan88291.asynctaskeasy.Room._Data;
-import easy.asyntask.tuan88291.library.Async;
+import easy.asyntask.tuan88291.library.AsyncTaskEasy;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,14 +22,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mSecond = findViewById(R.id.second);
         db = AppDatabase.getAppDatabase(this);
+//        db.queries().insertData(new _Data("tom", 12));
+//        db.queries().insertData(new _Data("tom2", 13));
+//        db.queries().insertData(new _Data("tom3", 14));
+//        db.queries().insertData(new _Data("tom4", 15));
         getData();
 
     }
 
     private void getData() {
-        Async job = new Async() {
+        AsyncTaskEasy job = new AsyncTaskEasy() {
             @Override
             protected Object doBackground() {
+
                 data = db.queries().getAll();
                 return data;
             }
@@ -39,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 super.onSuccess(s);
                 //do your result
                 List<_Data> item = (List<_Data>) s;
-                mSecond.setText(item.get(4).getName());
+                mSecond.setText(item.get(2).getName());
             }
 
             @Override
