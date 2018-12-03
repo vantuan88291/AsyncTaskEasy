@@ -2,14 +2,19 @@ package easy.asyntask.tuan88291.library;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+/*Created by vantuan88291
+01 Dec 2018
+ */
 
 @SuppressLint("StaticFieldLeak")
 public abstract class AsyncTaskEasy {
     private Asyn sync;
+
     protected AsyncTaskEasy() {
         sync = new Asyn();
         sync.execute();
     }
+
     public AsyncTaskEasy stop() {
         if (sync != null) {
             sync.cancel(true);
@@ -26,18 +31,16 @@ public abstract class AsyncTaskEasy {
                 return null;
             }
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             onLoading();
         }
+
         @Override
         protected void onPostExecute(Object s) {
             super.onPostExecute(s);
-            if (s == null){
-                onFail("Value return null from doBackground method");
-                return;
-            }
             try {
                 onSuccess(s);
             } catch (Exception e) {
@@ -45,8 +48,15 @@ public abstract class AsyncTaskEasy {
             }
         }
     }
-    protected abstract Object doBackground() throws Exception;
-    protected void onSuccess(Object s) {}
-    protected void onLoading() {}
-    protected void onFail(String err) {}
+
+    protected abstract Object doBackground();
+
+    protected void onSuccess(Object result) {
+    }
+
+    protected void onLoading() {
+    }
+
+    protected void onFail(String err) {
+    }
 }

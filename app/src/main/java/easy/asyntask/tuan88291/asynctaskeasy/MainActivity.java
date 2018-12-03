@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 //        db.queries().insertData(new _Data("tom3", 14));
 //        db.queries().insertData(new _Data("tom4", 15));
         getData();
-
     }
 
     private void getData() {
@@ -40,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onSuccess(Object s) {
-                super.onSuccess(s);
+            protected void onSuccess(Object result) {
+                super.onSuccess(result);
                 //do your result
-                List<_Data> item = (List<_Data>) s;
-                mSecond.setText(item.get(2).getName());
+                List<_Data> item = (List<_Data>) result;
+                mSecond.setText(item.get(6).getName());
             }
 
             @Override

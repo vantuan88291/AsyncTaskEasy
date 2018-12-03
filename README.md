@@ -1,7 +1,7 @@
 # AsyncTaskEasy
 [![](https://jitpack.io/v/vantuan88291/AsyncTaskEasy.svg)](https://jitpack.io/#vantuan88291/AsyncTaskEasy)
 
-Make AsyncTask easier and shorter in your code, just call new Async() and do your job.
+Make AsyncTask easier and shorter in your code, just call new AsyncTaskEasy() and do your job.
 ### To use font resources add support library to your dependencies:
 add maven in to your build.gradle project
 
@@ -16,11 +16,11 @@ allprojects {
 
 Add the dependency
 
-`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.5'`
+`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.6'`
 
 ### Usage
 ```
-Async job = new Async() {
+AsyncTaskEasy job = new AsyncTaskEasy() {
             @Override
             protected Object doBackground() {
                 //do your job
