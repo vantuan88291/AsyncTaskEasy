@@ -35,15 +35,15 @@ public class MainActivity extends AppCompatActivity {
             protected Object doBackground() {
 
                 data = db.queries().getAll();
-                return data;
+                return data.get(6).getName();
             }
 
             @Override
             protected void onSuccess(Object result) {
                 super.onSuccess(result);
                 //do your result
-                List<_Data> item = (List<_Data>) result;
-                mSecond.setText(item.get(6).getName());
+                String it = (String) result;
+                mSecond.setText(it);
             }
 
             @Override

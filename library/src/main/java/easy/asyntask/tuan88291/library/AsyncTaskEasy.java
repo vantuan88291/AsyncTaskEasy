@@ -24,11 +24,11 @@ public abstract class AsyncTaskEasy {
 
     private class Asyn extends AsyncTask<Object, Integer, Object> {
         @Override
-        protected Object doInBackground(Object... strings) {
+        protected Object doInBackground(Object... strings){
             try {
                 return AsyncTaskEasy.this.doBackground();
             } catch (Exception e) {
-                return null;
+                return e;
             }
         }
 
@@ -41,10 +41,14 @@ public abstract class AsyncTaskEasy {
         @Override
         protected void onPostExecute(Object s) {
             super.onPostExecute(s);
+            if (s instanceof Exception){
+                onFail(s.toString());
+            }else {
             try {
                 onSuccess(s);
             } catch (Exception e) {
                 onFail(e.toString());
+            }
             }
             onLoadComplete();
         }
