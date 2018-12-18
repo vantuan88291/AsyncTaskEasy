@@ -46,6 +46,7 @@ public abstract class AsyncTaskEasy {
             } catch (Exception e) {
                 onFail(e.toString());
             }
+            onLoadComplete();
         }
     }
 
@@ -56,7 +57,8 @@ public abstract class AsyncTaskEasy {
 
     protected void onLoading() {
     }
-
+    protected void onLoadComplete() {
+    }
     protected void onFail(String err) {
     }
 }

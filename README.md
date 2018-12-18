@@ -16,9 +16,10 @@ allprojects {
 
 Add the dependency
 
-`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.6'`
+`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.7'`
 
 ### Usage
+Java
 ```
 AsyncTaskEasy job = new AsyncTaskEasy() {
             @Override
@@ -46,7 +47,42 @@ AsyncTaskEasy job = new AsyncTaskEasy() {
                 super.onLoading();
                 //show loading
             }
+            @Override
+            protected void onLoadComplete() {
+            super.onLoadComplete();
+            //do when onLoading complete, even success fail
+            }
         };
+```
+Kotlin
+```
+object : AsyncTaskEasy() {
+            override fun doBackground(): Any? {
+                //do your job
+                return null
+            }
+      
+            override fun onSuccess(s: Any?) {
+                super.onSuccess(s)
+                //do your result
+
+            }
+
+            override fun onFail(err: String?) {
+                super.onFail(err)
+                ///do when have some fails
+
+            }
+
+            override fun onLoading() {
+                super.onLoading()
+                //show loading
+            }
+            override fun onLoadComplete() {
+            super.onLoadComplete()
+            //do when onLoading complete, even success fail
+            }
+        }
 ```
 
 
@@ -58,3 +94,4 @@ AsyncTaskEasy job = new AsyncTaskEasy() {
 | onSuccess     | show your result |
 | doBackground | run in background |
 | onFail | When have a exeption |
+| onLoadComplete | When you want to hide onLoading, even success fail |

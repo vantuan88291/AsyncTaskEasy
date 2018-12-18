@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
                 super.onLoading();
                 mSecond.setText("loading");
             }
+
+            @Override
+            protected void onLoadComplete() {
+                super.onLoadComplete();
+                //do when load complete, even success fail
+            }
         };
         ///stop async
 //        job.stop();
