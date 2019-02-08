@@ -16,7 +16,7 @@ allprojects {
 
 Add the dependency
 
-`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.0.9'`
+`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.1.0'`
 
 ### Usage
 Java
