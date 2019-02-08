@@ -12,6 +12,10 @@ public abstract class AsyncTaskEasy {
 
     protected AsyncTaskEasy() {
         sync = new Asyn();
+        sync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "");
+    }
+    protected AsyncTaskEasy(int key) {
+        sync = new Asyn();
         sync.execute();
     }
 
