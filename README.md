@@ -14,9 +14,14 @@ allprojects {
 }
 ```
 
-Add the dependency
+Add the dependency:
+Using Asynctask native:
 
 `implementation 'com.github.vantuan88291:AsyncTaskEasy:1.1.3'`
+
+Using RxJava:
+
+`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.1.4'`
 
 ### Usage
 Java
