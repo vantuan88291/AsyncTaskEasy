@@ -2,60 +2,44 @@ package easy.asyntask.tuan88291.library;
 
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 /*Created by vantuan88291
 01 Dec 2018
  */
 
-@SuppressLint("StaticFieldLeak")
 public abstract class AsyncTaskEasy {
-    private Asyn sync;
-
+    @SuppressLint("CheckResult")
     protected AsyncTaskEasy() {
-        sync = new Asyn();
-        sync.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "");
-    }
-    protected AsyncTaskEasy(int key) {
-        sync = new Asyn();
-        sync.execute();
-    }
+        this.onLoading();
+        Observable.fromCallable(this::doBackground)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableObserver<Object>() {
 
-    public AsyncTaskEasy stop() {
-        if (sync != null) {
-            sync.cancel(true);
-        }
-        return this;
-    }
+                    @Override
+                    public void onNext(Object o) {
+                        try {
+                            onSuccess(o);
+                        } catch (Exception e) {
+                            onFail(e.getLocalizedMessage());
+                        }
+                    }
 
-    private class Asyn extends AsyncTask<Object, Integer, Object> {
-        @Override
-        protected Object doInBackground(Object... strings){
-            try {
-                return AsyncTaskEasy.this.doBackground();
-            } catch (Exception e) {
-                return e;
-            }
-        }
+                    @Override
+                    public void onError(Throwable e) {
+                        onFail(e.getLocalizedMessage());
+                        onComplete();
+                    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            onLoading();
-        }
-
-        @Override
-        protected void onPostExecute(Object s) {
-            super.onPostExecute(s);
-            if (s instanceof Exception){
-                onFail(s.toString());
-            }else {
-            try {
-                onSuccess(s);
-            } catch (Exception e) {
-                onFail(e.toString());
-            }
-            }
-            onLoadComplete();
-        }
+                    @Override
+                    public void onComplete() {
+                        onLoadComplete();
+                    }
+                });
     }
 
     protected abstract Object doBackground();
