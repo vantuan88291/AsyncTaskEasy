@@ -21,7 +21,7 @@ Using Asynctask native:
 
 Using RxJava:
 
-`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.1.4'`
+`implementation 'com.github.vantuan88291:AsyncTaskEasy:1.1.5'`
 
 ### Usage
 Java
